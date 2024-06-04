@@ -9,3 +9,24 @@ services:
       - .:/opt/app
     ports:
         - "8080:80"
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: learn_sqs
+    ports:
+      - '127.0.0.1:3306:3306/tcp'
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 30s
+      retries: 20
+
+volumes:
+  mysql_data:
+    driver: local
