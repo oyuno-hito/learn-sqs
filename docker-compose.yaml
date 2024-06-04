@@ -27,6 +27,19 @@ services:
       timeout: 30s
       retries: 20
 
+  migrate:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      target: migrate
+    env_file:
+      - .env
+    volumes:
+      - .:/opt/app
+    depends_on:
+      db:
+        condition: service_healthy
+
 volumes:
   mysql_data:
     driver: local
