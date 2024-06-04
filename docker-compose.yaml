@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
       context: .
       target: api
+    env_file:
+      - .env
     volumes:
       - .:/opt/app
     ports:
@@ -39,6 +41,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    profiles:
+      - extra
 
 volumes:
   mysql_data:
