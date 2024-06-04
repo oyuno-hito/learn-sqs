@@ -18,6 +18,7 @@ func main() {
 	controllers := di.Wire(db)
 
 	router.GET("/health", controllers.HealthController.GET)
+	router.POST("/messages", controllers.MessageController.Post)
 
 	_ = router.Run(":80")
 }

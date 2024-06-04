@@ -15,6 +15,7 @@ import (
 
 func Wire(db *gorm.DB) controller.Controllers {
 	healthController := controller.NewHealthController(db)
-	controllers := controller.NewControllers(healthController)
+	messageController := controller.NewMessageController(db)
+	controllers := controller.NewControllers(healthController, messageController)
 	return controllers
 }

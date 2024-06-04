@@ -1,11 +1,16 @@
 package controller
 
 type Controllers struct {
-	HealthController HealthController
+	HealthController  HealthController
+	MessageController MessageController
 }
 
-func NewControllers(healthController HealthController) Controllers {
+func NewControllers(
+	healthController HealthController,
+	messageController MessageController,
+) Controllers {
 	return Controllers{
-		HealthController: healthController,
+		HealthController:  healthController,
+		MessageController: messageController,
 	}
 }

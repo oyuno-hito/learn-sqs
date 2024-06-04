@@ -13,6 +13,7 @@ func Wire(db *gorm.DB) controller.Controllers {
 	wire.Build(
 		controller.NewControllers,
 		controller.NewHealthController,
+		controller.NewMessageController,
 	)
 	return controller.Controllers{}
 }
