@@ -43,6 +43,16 @@ services:
         condition: service_healthy
     profiles:
       - extra
+  localstack:
+    build:
+      target: localstack
+    ports:
+      - "127.0.0.1:4566:4566"
+    environment:
+      - SERVICES=sqs # Write the AWS services you want to use, separated by commas
+      - DEBUG=${DEBUG:-0}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
 volumes:
   mysql_data:

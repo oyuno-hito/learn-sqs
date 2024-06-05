@@ -8,13 +8,15 @@ package di
 
 import (
 	"gorm.io/gorm"
+	"learn-sqs/app/pkg/sqs"
 	"learn-sqs/app/service/api/presentation/controller"
 )
 
 // Injectors from wire.go:
 
-func Wire(db *gorm.DB) controller.Controllers {
+func Wire(db *gorm.DB, sqs *sqsclient.Sqs) controller.Controllers {
 	healthController := controller.NewHealthController(db)
-	controllers := controller.NewControllers(healthController)
+	messageController := controller.NewMessageController(db, sqs)
+	controllers := controller.NewControllers(healthController, messageController)
 	return controllers
 }

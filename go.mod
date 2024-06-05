@@ -5,14 +5,31 @@ go 1.22.1
 require (
 	ariga.io/atlas-go-sdk v0.5.3
 	ariga.io/atlas-provider-gorm v0.4.0
+	github.com/aws/aws-sdk-go-v2 v1.27.1
+	github.com/aws/aws-sdk-go-v2/config v1.27.17
+	github.com/aws/aws-sdk-go-v2/service/sqs v1.32.4
 	github.com/gin-gonic/gin v1.10.0
 	github.com/google/wire v0.6.0
+	github.com/samber/lo v1.39.0
+	gorm.io/driver/mysql v1.5.1
+	gorm.io/gorm v1.25.7
 )
 
 require (
 	ariga.io/atlas v0.20.1-0.20240321075817-75fd3b1accbf // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.17 // indirect
+	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.4 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.8 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.8 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/ini v1.8.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.11.2 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.11.10 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sso v1.20.10 // indirect
+	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.24.4 // indirect
+	github.com/aws/aws-sdk-go-v2/service/sts v1.28.11 // indirect
+	github.com/aws/smithy-go v1.20.2 // indirect
 	github.com/bytedance/sonic v1.11.6 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
@@ -50,14 +67,13 @@ require (
 	github.com/zclconf/go-cty v1.14.1 // indirect
 	golang.org/x/arch v0.8.0 // indirect
 	golang.org/x/crypto v0.23.0 // indirect
+	golang.org/x/exp v0.0.0-20220303212507-bbda1eaf7a17 // indirect
 	golang.org/x/net v0.25.0 // indirect
 	golang.org/x/sys v0.20.0 // indirect
 	golang.org/x/text v0.15.0 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	gorm.io/driver/mysql v1.5.1 // indirect
 	gorm.io/driver/postgres v1.5.2 // indirect
 	gorm.io/driver/sqlite v1.5.2 // indirect
 	gorm.io/driver/sqlserver v1.5.2 // indirect
-	gorm.io/gorm v1.25.7 // indirect
 )
