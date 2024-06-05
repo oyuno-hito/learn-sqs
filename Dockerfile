@@ -14,3 +14,9 @@ COPY . .
 RUN curl -sSf https://atlasgo.sh | sh
 
 CMD [ "go", "run", "app/cmd/migrate/main.go" ]
+
+FROM localstack/localstack as localstack
+
+COPY ./tools/localstack/init/ready.d/init-aws.sh /etc/localstack/init/ready.d/init-aws.sh
+
+RUN chmod +x /etc/localstack/init/ready.d/init-aws.sh
