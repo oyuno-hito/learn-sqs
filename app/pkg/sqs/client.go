@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -67,7 +66,6 @@ func (s Sqs) SendMessage(ctx context.Context, message string) error {
 	}
 
 	_, err := s.client.SendMessage(ctx, params)
-	fmt.Println(err)
 	if err != nil {
 		return err
 	}
