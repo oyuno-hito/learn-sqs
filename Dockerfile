@@ -15,8 +15,10 @@ RUN curl -sSf https://atlasgo.sh | sh
 
 CMD [ "go", "run", "app/cmd/migrate/main.go" ]
 
-FROM localstack/localstack as localstack
+FROM golang:1.22 as lambda
 
-COPY ./tools/localstack/init/ready.d/init-aws.sh /etc/localstack/init/ready.d/init-aws.sh
+WORKDIR /opt/app
+COPY . .
 
-RUN chmod +x /etc/localstack/init/ready.d/init-aws.sh
+RUN apt-get update
+RUN apt-get -y install zip

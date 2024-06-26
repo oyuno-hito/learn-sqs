@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   api:
     build:
@@ -10,7 +9,13 @@ services:
     volumes:
       - .:/opt/app
     ports:
-        - "8080:80"
+      - "8080:80"
+    depends_on:
+      db:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+
   db:
     image: mysql:8.0
     environment:
@@ -43,16 +48,36 @@ services:
         condition: service_healthy
     profiles:
       - extra
-  localstack:
+
+  build_lambda:
+    image: golang:1.22
     build:
-      target: localstack
+      target: lambda
+    working_dir: /opt/app
+    platform: linux/x86_64
+    env_file:
+      - .env
+    volumes:
+      - .:/opt/app
+      - ./files:/opt/app/files
+    command: sh -c 'go build -o files/bootstrap app/cmd/lambda/main.go && zip -rj files/lambda.zip files/bootstrap'
+
+  localstack:
+    image: localstack/localstack
     ports:
       - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4574:4574"
     environment:
-      - SERVICES=sqs # Write the AWS services you want to use, separated by commas
+      - SERVICES=sqs,lambda,logs # Write the AWS services you want to use, separated by commas
       - DEBUG=${DEBUG:-0}
     volumes:
+      - ./files:/opt/files
+      - ./tools/localstack/init/ready.d/init-aws.sh:/etc/localstack/init/ready.d/init-aws.sh
       - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      build_lambda:
+        condition: service_completed_successfully
+    command: chmod +x /etc/localstack/init/ready.d/init-aws.sh
 
 volumes:
   mysql_data:

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"fmt"
+	database "learn-sqs/app/pkg/database/model"
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -56,7 +56,7 @@ func initAwsConfig() (*aws.Config, error) {
 	return &cfg, nil
 }
 
-func (s Sqs) SendMessage(ctx context.Context, message string) error {
+func (s Sqs) SendMessage(ctx context.Context, message database.Message) error {
 	messageBody := bytes.NewBuffer(
 		lo.Must(json.Marshal(message)),
 	).String()
@@ -67,7 +67,6 @@ func (s Sqs) SendMessage(ctx context.Context, message string) error {
 	}
 
 	_, err := s.client.SendMessage(ctx, params)
-	fmt.Println(err)
 	if err != nil {
 		return err
 	}
