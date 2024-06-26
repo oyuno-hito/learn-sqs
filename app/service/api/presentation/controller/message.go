@@ -35,13 +35,13 @@ func (c MessageController) Post(ctx *gin.Context) {
 		return
 	}
 
-	err := c.saveMessage(req.Message)
+	message, err := c.saveMessage(req.Message)
 	if err != nil {
 		ctx.Status(http.StatusInternalServerError)
 		return
 	}
 
-	err = c.sendMessage(ctx, req.Message)
+	err = c.sendMessage(ctx, message)
 	if err != nil {
 		ctx.Status(http.StatusInternalServerError)
 		return
@@ -50,11 +50,11 @@ func (c MessageController) Post(ctx *gin.Context) {
 	ctx.Status(http.StatusCreated)
 }
 
-func (c MessageController) saveMessage(message string) error {
+func (c MessageController) saveMessage(message string) (database.Message, error) {
 	model := database.Message{Text: message}
-	return c.db.Create(&model).Error
+	return model, c.db.Create(&model).Error
 }
 
-func (c MessageController) sendMessage(ctx context.Context, message string) error {
+func (c MessageController) sendMessage(ctx context.Context, message database.Message) error {
 	return c.sqs.SendMessage(ctx, message)
 }
