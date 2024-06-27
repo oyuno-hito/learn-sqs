@@ -10,11 +10,11 @@ sqsの学習を目的にしたwebアプリケーション開発リポジトリ
 
 ![architecture](doc/architecture.jpg)
 
-# Usage
+# usage
 
 ```shell
 docker-compose up -d
-curl localhost:8080/health
+curl -XPOST http://localhost:8080/messages -d '{"message": "test message"}'
 ```
 
 # migration
