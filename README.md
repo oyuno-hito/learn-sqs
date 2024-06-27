@@ -6,9 +6,9 @@ sqsの学習を目的にしたwebアプリケーション開発リポジトリ
 - docker-compose
 - atlas
 
-# システム設計図
+# システム構成図
 
-TBD
+![architecture](doc/architecture.jpg)
 
 # Usage
 
